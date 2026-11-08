@@ -1,0 +1,168 @@
+{
+  "read_file": {
+    "description": "Read a text file from the project. Returns the requested lines.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {"type": "string", "description": "Path relative to the project root"},
+        "start_line": {"type": "integer", "minimum": 1},
+        "end_line": {"type": "integer", "minimum": 1}
+      },
+      "required": ["path"],
+      "additionalProperties": false
+    }
+  },
+  "write_file": {
+    "description": "Create or overwrite a text file in the project.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {"type": "string"},
+        "content": {"type": "string"}
+      },
+      "required": ["path", "content"],
+      "additionalProperties": false
+    }
+  },
+  "edit_file": {
+    "description": "Replace one exact occurrence of old_text with new_text in a file.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {"type": "string"},
+        "old_text": {"type": "string"},
+        "new_text": {"type": "string"}
+      },
+      "required": ["path", "old_text", "new_text"],
+      "additionalProperties": false
+    }
+  },
+  "run_command": {
+    "description": "Run a shell command in the project directory and return its output.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "command": {"type": "string"},
+        "timeout_s": {"type": "integer", "minimum": 1, "maximum": 600}
+      },
+      "required": ["command"],
+      "additionalProperties": false
+    }
+  },
+  "search_code": {
+    "description": "Search the project's files for text and return matching lines.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {"type": "string"},
+        "path": {"type": "string", "description": "Directory to search, default the project root"},
+        "regex": {"type": "boolean", "description": "Treat query as a regular expression"}
+      },
+      "required": ["query"],
+      "additionalProperties": false
+    }
+  },
+  "list_dir": {
+    "description": "List files and directories under a path.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {"type": "string"},
+        "depth": {"type": "integer", "minimum": 1, "maximum": 5}
+      },
+      "required": ["path"],
+      "additionalProperties": false
+    }
+  },
+  "git_commit": {
+    "description": "Stage the given files and create a git commit.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "message": {"type": "string"},
+        "files": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      },
+      "required": ["message", "files"],
+      "additionalProperties": false
+    }
+  },
+  "create_issue": {
+    "description": "Open an issue in the project's tracker.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "title": {"type": "string"},
+        "body": {"type": "string"},
+        "labels": {"type": "array", "items": {"type": "string", "enum": ["bug", "feature", "docs", "question"]}},
+        "priority": {"type": "string", "enum": ["low", "medium", "high"]}
+      },
+      "required": ["title", "labels", "priority"],
+      "additionalProperties": false
+    }
+  },
+  "get_weather": {
+    "description": "Get the current weather for a city.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "city": {"type": "string"},
+        "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]}
+      },
+      "required": ["city"],
+      "additionalProperties": false
+    }
+  },
+  "convert_currency": {
+    "description": "Convert an amount between two currencies using today's rate.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "amount": {"type": "number"},
+        "from_currency": {"type": "string", "description": "ISO 4217 code, e.g. USD"},
+        "to_currency": {"type": "string", "description": "ISO 4217 code, e.g. EUR"}
+      },
+      "required": ["amount", "from_currency", "to_currency"],
+      "additionalProperties": false
+    }
+  },
+  "schedule_meeting": {
+    "description": "Schedule a meeting on the calendar.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "title": {"type": "string"},
+        "date": {"type": "string", "description": "YYYY-MM-DD"},
+        "start_time": {"type": "string", "description": "HH:MM, 24-hour"},
+        "duration_minutes": {"type": "integer", "minimum": 5},
+        "attendees": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["title", "date", "start_time", "duration_minutes"],
+      "additionalProperties": false
+    }
+  },
+  "send_email": {
+    "description": "Send an email.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "to": {"type": "string"},
+        "subject": {"type": "string"},
+        "body": {"type": "string"}
+      },
+      "required": ["to", "subject", "body"],
+      "additionalProperties": false
+    }
+  },
+  "send_sms": {
+    "description": "Send a short text message to a phone number.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "phone": {"type": "string"},
+        "text": {"type": "string"}
+      },
+      "required": ["phone", "text"],
+      "additionalProperties": false
+    }
+  }
+}
