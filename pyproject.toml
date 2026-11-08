@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qvac-agent-bench"
+version = "0.1.0"
+description = "Agent-readiness checks for QVAC local models and SDKs: tool-call conformance, coding tasks and fresh-install smoke tests"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.11"
+dependencies = ["jsonschema>=4.21,<5"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+qvac-bench = "qvac_bench.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["qvac_bench*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

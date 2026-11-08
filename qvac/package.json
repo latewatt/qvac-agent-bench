@@ -1,0 +1,9 @@
+{
+  "name": "qvac-agent-bench-runtime",
+  "private": true,
+  "description": "Pinned QVAC CLI and SDK used by the bench. Install with `make install-qvac`.",
+  "dependencies": {
+    "@qvac/cli": "0.18.0",
+    "@qvac/sdk": "0.23.0"
+  }
+}
